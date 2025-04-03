@@ -12,12 +12,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from '@/contexts/AuthContext';
 import { UserIcon, LogOutIcon, User2Icon } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const ProfileMenu = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   
-  const username = user?.user_metadata?.username || 'Commander';
+  const username = user?.user_metadata?.username || user?.user_metadata?.name || 'Commander';
+  const userAvatar = user?.user_metadata?.avatar_url || null;
+  const initials = username.slice(0, 2).toUpperCase();
   
   const handleSignOut = async () => {
     await signOut();
@@ -27,8 +30,17 @@ const ProfileMenu = () => {
   return user ? (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative text-cosmic-light-purple border border-cosmic-purple/40 px-4">
-          <UserIcon className="h-5 w-5 mr-2" />
+        <Button variant="ghost" className="relative text-cosmic-light-purple border border-cosmic-purple/40 px-4 flex items-center gap-2">
+          {userAvatar ? (
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={userAvatar} alt={username} />
+              <AvatarFallback className="bg-cosmic-purple/20 text-cosmic-light-purple">
+                {initials}
+              </AvatarFallback>
+            </Avatar>
+          ) : (
+            <UserIcon className="h-5 w-5" />
+          )}
           <span className="truncate max-w-[100px]">{username}</span>
         </Button>
       </DropdownMenuTrigger>

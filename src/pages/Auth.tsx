@@ -11,6 +11,9 @@ import CosmicBackground from '@/components/CosmicBackground';
 import GameTitle from '@/components/GameTitle';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from '@/contexts/AuthContext';
+import { Separator } from "@/components/ui/separator";
+import { GoogleIcon } from '@/components/icons/GoogleIcon';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -20,6 +23,7 @@ const Auth = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { signInWithGoogle } = useAuth();
 
   // Check if user is already logged in
   useEffect(() => {
@@ -101,6 +105,15 @@ const Auth = () => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    setError(null);
+    try {
+      await signInWithGoogle();
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center">
       <CosmicBackground />
@@ -159,6 +172,27 @@ const Auth = () => {
                 >
                   {loading ? "Signing in..." : "Sign In"}
                 </Button>
+
+                <div className="relative my-4">
+                  <div className="absolute inset-0 flex items-center">
+                    <Separator className="w-full border-muted-foreground/30" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                      Or continue with
+                    </span>
+                  </div>
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full border border-cosmic-purple/30 hover:bg-cosmic-purple/10"
+                  onClick={handleGoogleSignIn}
+                >
+                  <GoogleIcon className="mr-2 h-4 w-4" />
+                  Google
+                </Button>
               </form>
             </TabsContent>
             
@@ -212,6 +246,27 @@ const Auth = () => {
                   disabled={loading}
                 >
                   {loading ? "Creating account..." : "Create Account"}
+                </Button>
+
+                <div className="relative my-4">
+                  <div className="absolute inset-0 flex items-center">
+                    <Separator className="w-full border-muted-foreground/30" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                      Or continue with
+                    </span>
+                  </div>
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full border border-cosmic-purple/30 hover:bg-cosmic-purple/10"
+                  onClick={handleGoogleSignIn}
+                >
+                  <GoogleIcon className="mr-2 h-4 w-4" />
+                  Google
                 </Button>
               </form>
             </TabsContent>
