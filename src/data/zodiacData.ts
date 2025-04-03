@@ -1,0 +1,103 @@
+
+import { ZodiacProps } from "../components/ZodiacCard";
+
+const zodiacData: ZodiacProps[] = [
+  {
+    name: "Aries",
+    symbol: "♈",
+    element: "Fire",
+    primaryAttribute: "Swift Attack",
+    description: "Born leaders with a fiery spirit, Aries commanders excel at rapid mobilization and aggressive tactics. Their forces strike with unmatched speed.",
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Taurus",
+    symbol: "♉",
+    element: "Earth",
+    primaryAttribute: "Resource Mastery",
+    description: "Patient and persistent, Taurus commanders build formidable economies. Their resource extraction is unmatched, generating wealth at an accelerated rate.",
+    image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Gemini",
+    symbol: "♊",
+    element: "Air",
+    primaryAttribute: "Dual Strategy",
+    description: "Masters of adaptability, Gemini commanders can deploy two strategies simultaneously. Their intelligence networks provide superior information.",
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Cancer",
+    symbol: "♋",
+    element: "Water",
+    primaryAttribute: "Supreme Defense",
+    description: "Protective and intuitive, Cancer commanders create impenetrable defenses. Their fortifications regenerate and provide refuge for allies.",
+    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Leo",
+    symbol: "♌",
+    element: "Fire",
+    primaryAttribute: "Inspiring Leadership",
+    description: "Natural-born rulers, Leo commanders inspire unmatched loyalty. Their presence on the battlefield boosts all allied forces' morale and combat effectiveness.",
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Virgo",
+    symbol: "♍",
+    element: "Earth",
+    primaryAttribute: "Tactical Precision",
+    description: "Analytical and meticulous, Virgo commanders optimize every operation. Their research capabilities and efficiency enhancements are unrivaled.",
+    image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Libra",
+    symbol: "♎",
+    element: "Air",
+    primaryAttribute: "Master Diplomacy",
+    description: "Diplomatic and fair, Libra commanders excel at forming profitable alliances. Their negotiation skills can turn enemies into allies with surprising speed.",
+    image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Scorpio",
+    symbol: "♏",
+    element: "Water",
+    primaryAttribute: "Covert Operations",
+    description: "Secretive and strategic, Scorpio commanders are masters of espionage and sabotage. Their poison capabilities can contaminate enemy resources.",
+    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Sagittarius",
+    symbol: "♐",
+    element: "Fire",
+    primaryAttribute: "Long-range Specialist",
+    description: "Adventurous and visionary, Sagittarius commanders excel at long-range combat. Their units have extended vision and attack range.",
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Capricorn",
+    symbol: "♑",
+    element: "Earth",
+    primaryAttribute: "Strategic Planning",
+    description: "Disciplined and patient, Capricorn commanders build empires for the long term. Their structures cost less and their economies grow steadily.",
+    image: "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Aquarius",
+    symbol: "♒",
+    element: "Air",
+    primaryAttribute: "Technological Edge",
+    description: "Innovative and progressive, Aquarius commanders are technological pioneers. Their research capabilities and special abilities are revolutionary.",
+    image: "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?auto=format&fit=crop&w=300&h=300",
+  },
+  {
+    name: "Pisces",
+    symbol: "♓",
+    element: "Water",
+    primaryAttribute: "Illusion Warfare",
+    description: "Intuitive and mystical, Pisces commanders manipulate perception on the battlefield. Their illusion abilities confuse enemies and mask true intentions.",
+    image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=300&h=300",
+  },
+];
+
+export default zodiacData;
