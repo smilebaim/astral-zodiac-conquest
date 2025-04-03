@@ -6,11 +6,14 @@ import ResourceBar from '@/components/ResourceBar';
 import CosmicBackground from '@/components/CosmicBackground';
 import GameTitle from '@/components/GameTitle';
 import IntroSection from '@/components/IntroSection';
+import ProfileMenu from '@/components/ProfileMenu';
 import zodiacData from '@/data/zodiacData';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Index = () => {
   const [selectedZodiac, setSelectedZodiac] = useState<ZodiacProps | null>(null);
   const [gameStarted, setGameStarted] = useState(false);
+  const { user } = useAuth();
   
   const handleZodiacSelect = (zodiac: ZodiacProps) => {
     setSelectedZodiac(zodiac);
@@ -30,7 +33,10 @@ const Index = () => {
       {gameStarted && <ResourceBar stardust={1000} celestialOre={500} ether={200} />}
       
       <div className="container mx-auto py-8 px-4">
-        <GameTitle />
+        <div className="flex justify-between items-center mb-8">
+          <GameTitle />
+          <ProfileMenu />
+        </div>
         
         {!gameStarted ? (
           <motion.div
