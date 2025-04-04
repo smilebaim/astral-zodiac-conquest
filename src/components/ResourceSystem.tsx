@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
+import { ZodiacProps } from './ZodiacCard';
+import { Star, Gem, Zap, Building, ArrowUpCircle, BarChart3 } from 'lucide-react';
 
 interface ResourceStats {
   stardust: {
@@ -50,6 +53,22 @@ interface TradeOffer {
     resource: 'stardust' | 'celestial_ore' | 'ether';
     amount: number;
   };
+  status: 'pending' | 'accepted' | 'rejected' | 'expired';
+  created_at: string;
+  expires_at: string;
+}
+
+interface ResourceSystemProps {
+  userZodiac: ZodiacProps;
+  userKingdom: {
+    id: string;
+    name: string;
+    resources: ResourceStats;
+    buildings: ResourceBuilding[];
+  };
+  onResourceUpdate?: (resources: ResourceStats) => void;
+    amount: number;
+  };
   status: 'active' | 'accepted' | 'cancelled';
   created_at: string;
 }
@@ -60,9 +79,9 @@ interface ResourceSystemProps {
 
 const ResourceSystem: React.FC<ResourceSystemProps> = ({ userId }) => {
   const [resourceStats, setResourceStats] = useState<ResourceStats>({
-    stardust: { current: 0, max: 0, generation_rate: 0, bonus_rate: 0 },
-    celestial_ore: { current: 0, max: 0, generation_rate: 0, bonus_rate: 0 },
-    ether: { current: 0, max: 0, generation_rate: 0, bonus_rate: 0 }
+    stardust: { current: 0, max: 1000, generation_rate: 1, bonus_rate: 0 },
+    celestial_ore: { current: 0, max: 800, generation_rate: 0.5, bonus_rate: 0 },
+    ether: { current: 0, max: 500, generation_rate: 0.2, bonus_rate: 0 }
   });
   const [buildings, setBuildings] = useState<ResourceBuilding[]>([]);
   const [tradeOffers, setTradeOffers] = useState<TradeOffer[]>([]);
@@ -73,6 +92,7 @@ const ResourceSystem: React.FC<ResourceSystemProps> = ({ userId }) => {
     offer: { resource: 'stardust', amount: 0 },
     request: { resource: 'celestial_ore', amount: 0 }
   });
+  const { toast } = useToast();
 
   useEffect(() => {
     fetchResourceStats();
@@ -312,9 +332,18 @@ const ResourceSystem: React.FC<ResourceSystemProps> = ({ userId }) => {
   };
 
   return (
-    <div className="bg-cosmic-dark/90 backdrop-blur-md rounded-lg border border-cosmic-purple/40 p-6">
-      <div className="flex flex-col gap-4">
-        <div className="flex justify-between items-center">
+    <div className="resource-system bg-cosmic-dark/90 backdrop-blur-md rounded-lg border border-cosmic-purple/40 p-6">
+        {/* Resource Collector Integration */}
+        <ResourceCollector
+          userId={userId}
+          resourceStats={resourceStats}
+          onResourceUpdate={(newStats) => {
+            setResourceStats(newStats);
+          }}
+        />
+
+        <div className="mt-8 flex flex-col gap-4">
+          <div className="flex justify-between items-center">
           <h2 className="text-2xl text-cosmic-light-purple font-bold">Resource Management</h2>
           <div className="flex items-center gap-4">
             {Object.entries(resourceStats).map(([resource, stats]) => (
@@ -588,4 +617,4 @@ const ResourceSystem: React.FC<ResourceSystemProps> = ({ userId }) => {
   );
 };
 
-export default ResourceSystem; 
+export default ResourceSystem;
