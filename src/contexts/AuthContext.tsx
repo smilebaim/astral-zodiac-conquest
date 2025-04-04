@@ -9,6 +9,7 @@ type AuthContextType = {
   isLoading: boolean;
   signOut: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
+  signUpWithEmail: (email: string, password: string) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -17,6 +18,7 @@ const AuthContext = createContext<AuthContextType>({
   isLoading: true,
   signOut: async () => {},
   signInWithGoogle: async () => {},
+  signUpWithEmail: async () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -63,8 +65,21 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     });
   };
 
+  const signUpWithEmail = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+    
+    if (error) {
+      throw error;
+    }
+    
+    return data;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, session, isLoading, signOut, signInWithGoogle }}>
+    <AuthContext.Provider value={{ user, session, isLoading, signOut, signInWithGoogle, signUpWithEmail }}>
       {children}
     </AuthContext.Provider>
   );
